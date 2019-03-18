@@ -1,4 +1,8 @@
-This is the project repo for the final project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. For more information about the project, see the project introduction [here](https://classroom.udacity.com/nanodegrees/nd013/parts/6047fe34-d93c-4f50-8336-b70ef10cb4b2/modules/e1a23b06-329a-4684-a717-ad476f0d8dff/lessons/462c933d-9f24-42d3-8bdc-a08a5fc866e4/concepts/5ab4b122-83e6-436d-850f-9f4d26627fd9).
+This is the project repo for the final project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. For more information about the project, see the project introduction [here](https://classroom.udacity.com/nanodegrees/nd013/parts/6047fe34-d93c-4f50-8336-b70ef10cb4b2/modules/e1a23b06-329a-4684-a717-ad476f0d8dff/lessons/462c933d-9f24-42d3-8bdc-a08a5fc866e4/concepts/5ab4b122-83e6-436d-850f-9f4d26627fd9). I used fine-tuned mobilenet-ssd_v2 to detect traffic lights.
+
+### FILES
+- train: include training config file
+- ros/src/tl_detector/frozen_graph : trained frozen graph(fine-tuned ssd_mobilenet_v2_coco)
 
 Please use **one** of the two installation options, either native **or** docker installation.
 
@@ -39,13 +43,13 @@ To set up port forwarding, please refer to the [instructions from term 2](https:
 
 1. Clone the project repository
 ```bash
-git clone https://github.com/udacity/CarND-Capstone.git
+git clone https://github.com/tanutarou/CarND-Capstone
 ```
 
 2. Install python dependencies
 ```bash
 cd CarND-Capstone
-pip install -r requirements.txt
+pip install -r requirements.txt   # IMPORTANT: I used tensorflow-gpu1.9 
 ```
 3. Make and run styx
 ```bash
@@ -56,19 +60,7 @@ roslaunch launch/styx.launch
 ```
 4. Run the simulator
 
-### Real world testing
-1. Download [training bag](https://s3-us-west-1.amazonaws.com/udacity-selfdrivingcar/traffic_light_bag_file.zip) that was recorded on the Udacity self-driving car.
-2. Unzip the file
-```bash
-unzip traffic_light_bag_file.zip
-```
-3. Play the bag file
-```bash
-rosbag play -l traffic_light_bag_file/traffic_light_training.bag
-```
-4. Launch your project in site mode
-```bash
-cd CarND-Capstone/ros
-roslaunch launch/site.launch
-```
-5. Confirm that traffic light detection works on real life images
+### Training
+* pretrained model : I used `ssd_mobilenet_v2_coco` as pretrained model from [here](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md)
+* dataset: https://github.com/alex-lechner/Traffic-Light-Classification#1-the-lazy-approach
+* train-script: I used this [tensorflow offical train script](https://github.com/tensorflow/models/blob/master/research/object_detection/legacy/train.py) and config file(`train/ssd_mobilenet_v2_coco.config`) for fine-tuning
